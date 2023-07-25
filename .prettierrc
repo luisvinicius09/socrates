@@ -1,7 +1,9 @@
 {
-  "semi": true,
-  "singleQuote": true,
-  "useTabs": true,
-  "tabWidth": 2,
-  "singleAttributePerLine": true
+	"semi": true,
+	"singleQuote": true,
+	"useTabs": true,
+	"tabWidth": 2,
+	"singleAttributePerLine": true,
+	"editorconfig": true,
+	"printWidth": 90
 }
