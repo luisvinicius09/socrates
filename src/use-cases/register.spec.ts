@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
+import { InMemoryUsersRepository } from '@/repositories/in-memory/users-repository';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RegisterUseCase } from './register';
 import { compare } from 'bcryptjs';
