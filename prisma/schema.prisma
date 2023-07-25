@@ -16,6 +16,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  Course    Course[]
 
   @@map("users")
 }
@@ -26,5 +27,32 @@ model Course {
   description String
   createdAt   DateTime @default(now())
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
   @@map("courses")
+}
+
+
+// Module can belong to multiple courses
+model Module {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  // lessons Lesson[]
+
+  @@map("modules")
+}
+
+// Can a lesson belong to a course without being in a module?
+model Lesson {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  // moduleId Int
+  // module   Module  @relation(fields: [moduleId], references: [id])
+
+  @@map("lessons")
 }
