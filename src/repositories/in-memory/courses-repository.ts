@@ -7,7 +7,7 @@ export class InMemoryCoursesRepository implements CoursesRepository {
 
 	async create(data: Prisma.CourseUncheckedCreateInput) {
 		const course = {
-			id: randomUUID(),
+			id: data.id ?? randomUUID(),
 			name: data.name,
 			description: data.description,
 			createdAt: new Date(),
@@ -19,9 +19,29 @@ export class InMemoryCoursesRepository implements CoursesRepository {
 		return course;
 	}
 
-	async findCourseById(id: string) {
+	async findById(id: string) {
 		const course = this.courses.find(c => c.id === id) ?? null;
 
 		return course;
+	}
+
+	async update(courseId: string, data: Prisma.CourseUpdateWithoutUserInput) {
+		const course = await this.findById(courseId);
+
+		if (!course) {
+			const newCourse = await this.create(data as Prisma.CourseUncheckedCreateInput);
+
+			this.courses.push(newCourse);
+
+			return newCourse;
+		}
+
+		this.courses = this.courses.map((item) => {
+			if (item.id === courseId) {
+				return { ...item, ...data };
+			}
+		}) as Course[];
+
+		return { ...course, ...data } as Course;
 	}
 }

@@ -11,12 +11,21 @@ export class PrismaCoursesRepository implements CoursesRepository {
 		return course;
 	}
 
-	async findCourseById(id: string) {
+	async findById(courseId: string) {
 		const course = await prisma.course.findUnique({
-			where: { id: id },
+			where: { id: courseId },
 		});
 
 		return course;
+	}
+
+	async update(courseId: string, data: Prisma.CourseUpdateWithoutUserInput) {
+		const updatedCourse = await prisma.course.update({
+			where: { id: courseId },
+			data: data
+		});
+
+		return updatedCourse;
 	}
 
 }
