@@ -19,7 +19,7 @@ export class PrismaLessonsRepository implements LessonsRepository {
 		return lesson;
 	}
 
-	async update(lessonId: string, data: Prisma.LessonUncheckedUpdateWithoutModuleInput) {
+	async update(lessonId: string, data: Prisma.LessonUpdateWithoutModuleInput) {
 		const lesson = await prisma.lesson.update({
 			where: { id: lessonId },
 			data: data,
