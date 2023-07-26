@@ -8,8 +8,8 @@ Functional Logic
 - [ ] Should be able to acquire a new course
 - [x] Should be able to create a lesson
 - [x] Should be able to edit a lesson
-- [ ] Should be able to create a module
-- [ ] Should be able to edit a module
+- [x] Should be able to create a module
+- [x] Should be able to edit a module
 
 Business Logic
 - [x] A user can't register with an email that is already in use
