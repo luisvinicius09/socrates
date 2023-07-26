@@ -5,6 +5,6 @@ export interface LessonsRepository {
 	findById(id: string): Promise<Lesson | null>;
 	update(
 		lessonId: string,
-		data: Prisma.LessonUncheckedUpdateWithoutModuleInput,
+		data: Prisma.LessonUpdateWithoutModuleInput,
 	): Promise<Lesson>;
 }

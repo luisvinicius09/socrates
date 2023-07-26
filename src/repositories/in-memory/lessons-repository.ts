@@ -8,7 +8,7 @@ export class InMemoryLessonsRepository implements LessonsRepository {
 	async create(data: Prisma.LessonUncheckedCreateWithoutModuleInput) {
 		const lesson = {
 			id: data.id ?? randomUUID(),
-			name: 'Lesson-1',
+			name: data.name,
 			createdAt: new Date(),
 			userId: data.userId,
 			moduleId: null,
@@ -25,16 +25,8 @@ export class InMemoryLessonsRepository implements LessonsRepository {
 		return lesson;
 	}
 
-	async update(lessonId: string, data: Prisma.LessonUncheckedUpdateWithoutModuleInput) {
-		const course = await this.findById(lessonId);
-
-		if (!course) {
-			const newLesson = await this.create(data as Prisma.CourseUncheckedCreateInput);
-
-			this.lessons.push(newLesson);
-
-			return newLesson;
-		}
+	async update(lessonId: string, data: Prisma.LessonUpdateWithoutModuleInput) {
+		const lesson = await this.findById(lessonId);
 
 		this.lessons = this.lessons.map((item) => {
 			if (item.id === lessonId) {
@@ -42,6 +34,6 @@ export class InMemoryLessonsRepository implements LessonsRepository {
 			}
 		}) as Lesson[];
 
-		return { ...course, ...data } as Lesson;
+		return { ...lesson, ...data } as Lesson;
 	}
 }
