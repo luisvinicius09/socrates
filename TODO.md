@@ -6,8 +6,8 @@ Functional Logic
 - [x] Should be able to create a new course
 - [x] Should be able to edit the course
 - [ ] Should be able to acquire a new course
-- [ ] Should be able to create a lesson
-- [ ] Should be able to edit a lesson
+- [x] Should be able to create a lesson
+- [x] Should be able to edit a lesson
 - [ ] Should be able to create a module
 - [ ] Should be able to edit a module
 
