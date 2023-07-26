@@ -17,6 +17,8 @@ model User {
   password  String
   createdAt DateTime @default(now())
   Course    Course[]
+  Lesson    Lesson[]
+  Module    Module[]
 
   @@map("users")
 }
@@ -50,6 +52,9 @@ model Module {
   name      String
   createdAt DateTime @default(now())
 
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   lessons          Lesson[]
   ModulesOnCourses ModulesOnCourses[]
 
@@ -63,6 +68,8 @@ model Lesson {
 
   moduleId String?
   module   Module? @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("lessons")
 }
