@@ -27,32 +27,42 @@ model Course {
   description String
   createdAt   DateTime @default(now())
 
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  userId           String
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ModulesOnCourses ModulesOnCourses[]
 
   @@map("courses")
 }
 
+model ModulesOnCourses {
+  createdAt DateTime @default(now())
 
-// Module can belong to multiple courses
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  moduleId String
+  module   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+
+  @@id([courseId, moduleId])
+}
+
 model Module {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   name      String
   createdAt DateTime @default(now())
 
-  // lessons Lesson[]
+  lessons          Lesson[]
+  ModulesOnCourses ModulesOnCourses[]
 
   @@map("modules")
 }
 
-// Can a lesson belong to a course without being in a module?
 model Lesson {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   name      String
   createdAt DateTime @default(now())
 
-  // moduleId Int
-  // module   Module  @relation(fields: [moduleId], references: [id])
+  moduleId String?
+  module   Module? @relation(fields: [moduleId], references: [id], onDelete: SetNull)
 
   @@map("lessons")
 }
