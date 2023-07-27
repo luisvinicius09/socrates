@@ -2,7 +2,7 @@ A courses plataform
 
 Functional Logic
 - [x] Should be to register
-- [ ] Should be to be able to authenticate
+- [x] Should be to be able to authenticate
 - [x] Should be able to create a new course
 - [x] Should be able to edit the course
 - [ ] Should be able to acquire a new course
