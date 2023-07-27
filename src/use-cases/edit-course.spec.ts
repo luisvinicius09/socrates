@@ -2,15 +2,14 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { EditCourseUseCase } from './edit-course';
 import { InMemoryCoursesRepository } from '@/repositories/in-memory/courses-repository';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/users-repository';
-import { RegisterUseCase } from './register';
 import { UsersRepository } from '@/repositories/interfaces/users-repository';
 import { CreateCourseUseCase } from './create-course';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { CoursesRepository } from '@/repositories/interfaces/courses-repository';
 
-let coursesRepository: InMemoryCoursesRepository;
+let coursesRepository: CoursesRepository;
 let usersRepository: UsersRepository;
 
-let registerUseCase: RegisterUseCase;
 let createCourseUseCase: CreateCourseUseCase;
 let sut: EditCourseUseCase;
 
@@ -18,14 +17,13 @@ beforeEach(() => {
 	usersRepository = new InMemoryUsersRepository();
 	coursesRepository = new InMemoryCoursesRepository();
 
-	registerUseCase = new RegisterUseCase(usersRepository);
 	createCourseUseCase = new CreateCourseUseCase(coursesRepository);
 	sut = new EditCourseUseCase(coursesRepository);
 });
 
 describe('Edit Course Use Case', () => {
 	it('should edit the course', async () => {
-		const { user } = await registerUseCase.execute({
+		const user = await usersRepository.create({
 			email: 'joe@doe.com',
 			name: 'Joe Doe',
 			password: 'joe-doe-pw',

@@ -2,14 +2,14 @@ import { InMemoryLessonsRepository } from '@/repositories/in-memory/lessons-repo
 import { beforeEach, describe, expect, it } from 'vitest';
 import { EditLessonUseCase } from './edit-lesson';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/users-repository';
-import { RegisterUseCase } from './register';
 import { CreateLessonUseCase } from './create-lesson';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { UsersRepository } from '@/repositories/interfaces/users-repository';
+import { LessonsRepository } from '@/repositories/interfaces/lessons-repository';
 
-let usersRepository: InMemoryUsersRepository;
-let lessonsRepository: InMemoryLessonsRepository;
+let usersRepository: UsersRepository;
+let lessonsRepository: LessonsRepository;
 
-let registerUseCase: RegisterUseCase;
 let createLessonUseCase: CreateLessonUseCase;
 let sut: EditLessonUseCase;
 
@@ -18,13 +18,12 @@ describe('Edit Lesson Use Case', () => {
 		lessonsRepository = new InMemoryLessonsRepository();
 		usersRepository = new InMemoryUsersRepository();
 
-		registerUseCase = new RegisterUseCase(usersRepository);
 		createLessonUseCase = new CreateLessonUseCase(lessonsRepository);
 		sut = new EditLessonUseCase(lessonsRepository);
 	});
 
 	it('should edit a lesson', async () => {
-		const { user } = await registerUseCase.execute({
+		const user = await usersRepository.create({
 			email: 'joe-doe@email.com',
 			name: 'Joe Doe',
 			password: 'joe-doe-pw',

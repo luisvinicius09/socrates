@@ -2,25 +2,24 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { CreateLessonUseCase } from './create-lesson';
 import { InMemoryLessonsRepository } from '@/repositories/in-memory/lessons-repository';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/users-repository';
-import { RegisterUseCase } from './register';
+import { UsersRepository } from '@/repositories/interfaces/users-repository';
+import { LessonsRepository } from '@/repositories/interfaces/lessons-repository';
 
-let usersRepository: InMemoryUsersRepository;
-let lessonsRepository: InMemoryLessonsRepository;
+let usersRepository: UsersRepository;
+let lessonsRepository: LessonsRepository;
 
-let registerUseCase: RegisterUseCase;
 let sut: CreateLessonUseCase;
 
 beforeEach(() => {
 	lessonsRepository = new InMemoryLessonsRepository();
 	usersRepository = new InMemoryUsersRepository();
 
-	registerUseCase = new RegisterUseCase(usersRepository);
 	sut = new CreateLessonUseCase(lessonsRepository);
 });
 
 describe('Create Lesson Use Case', () => {
 	it('should create lesson', async () => {
-		const { user } = await registerUseCase.execute({
+		const user = await usersRepository.create({
 			email: 'joe@doe.com',
 			name: 'Joe Doe',
 			password: 'joe-doe-pw',
