@@ -1,10 +1,10 @@
 import { Lesson, Prisma } from '@prisma/client';
 
 export interface LessonsRepository {
-	create(data: Prisma.LessonUncheckedCreateWithoutModuleInput): Promise<Lesson>;
+	create(data: Prisma.LessonUncheckedCreateInput): Promise<Lesson>;
 	findById(id: string): Promise<Lesson | null>;
 	update(
 		lessonId: string,
-		data: Prisma.LessonUpdateWithoutModuleInput,
+		data: Prisma.LessonUncheckedUpdateWithoutUserInput,
 	): Promise<Lesson>;
 }

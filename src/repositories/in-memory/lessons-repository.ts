@@ -5,13 +5,13 @@ import { randomUUID } from 'crypto';
 export class InMemoryLessonsRepository implements LessonsRepository {
 	public lessons: Lesson[] = [];
 
-	async create(data: Prisma.LessonUncheckedCreateWithoutModuleInput) {
+	async create(data: Prisma.LessonUncheckedCreateInput) {
 		const lesson = {
 			id: data.id ?? randomUUID(),
 			name: data.name,
 			createdAt: new Date(),
 			userId: data.userId,
-			moduleId: null,
+			moduleId: data.moduleId ?? null,
 		};
 
 		this.lessons.push(lesson);
@@ -25,7 +25,7 @@ export class InMemoryLessonsRepository implements LessonsRepository {
 		return lesson;
 	}
 
-	async update(lessonId: string, data: Prisma.LessonUpdateWithoutModuleInput) {
+	async update(lessonId: string, data: Prisma.LessonUncheckedUpdateWithoutUserInput) {
 		const lesson = await this.findById(lessonId);
 
 		this.lessons = this.lessons.map((item) => {

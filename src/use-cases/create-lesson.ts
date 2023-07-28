@@ -4,6 +4,7 @@ import { Lesson } from '@prisma/client';
 interface CreateLessonUseCaseRequest {
 	userId: string;
 	name: string;
+	moduleId: string | null;
 }
 
 interface CreateLessonUseCaseResponse {
@@ -16,10 +17,12 @@ export class CreateLessonUseCase {
 	async execute({
 		userId,
 		name,
+		moduleId,
 	}: CreateLessonUseCaseRequest): Promise<CreateLessonUseCaseResponse> {
 		const lesson = await this.lessonsRepository.create({
 			userId,
 			name,
+			moduleId,
 		});
 
 		return { lesson };

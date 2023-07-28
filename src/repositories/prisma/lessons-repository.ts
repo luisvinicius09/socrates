@@ -3,7 +3,7 @@ import { LessonsRepository } from '../interfaces/lessons-repository';
 import { prisma } from '@/lib/prisma';
 
 export class PrismaLessonsRepository implements LessonsRepository {
-	async create(data: Prisma.LessonUncheckedCreateWithoutModuleInput) {
+	async create(data: Prisma.LessonUncheckedCreateInput) {
 		const lesson = await prisma.lesson.create({
 			data: data,
 		});
@@ -19,7 +19,7 @@ export class PrismaLessonsRepository implements LessonsRepository {
 		return lesson;
 	}
 
-	async update(lessonId: string, data: Prisma.LessonUpdateWithoutModuleInput) {
+	async update(lessonId: string, data: Prisma.LessonUncheckedUpdateWithoutUserInput) {
 		const lesson = await prisma.lesson.update({
 			where: { id: lessonId },
 			data: data,

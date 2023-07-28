@@ -5,6 +5,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error';
 interface EditLessonUseCaseRequest {
 	lessonId: string;
 	name: string;
+	moduleId: string | null;
 }
 
 interface EditLessonUseCaseResponse {
@@ -17,6 +18,7 @@ export class EditLessonUseCase {
 	async execute({
 		lessonId,
 		name,
+		moduleId,
 	}: EditLessonUseCaseRequest): Promise<EditLessonUseCaseResponse> {
 		const lesson = await this.lessonsRepository.findById(lessonId);
 
@@ -26,6 +28,7 @@ export class EditLessonUseCase {
 
 		const updatedLesson = await this.lessonsRepository.update(lessonId, {
 			name: name,
+			moduleId: moduleId,
 		});
 
 		return { lesson: updatedLesson };
