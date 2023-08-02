@@ -16,8 +16,9 @@ Business Logic
 - [ ] The user will can only create 10 courses
 - [ ] Each course will be able to have multiple lesson
 - [ ] A lesson consists of text, video and/or files
-- [ ] A module is able to group multiple lessons together
-- [ ] A module and lesson can be shared by multiple courses
+- [x] A module is able to group multiple lessons together
+- [x] A course is able to have multiple modules
+- [x] A module can be shared by multiple courses
 - [ ] A user can not acquire a course in which he is the owner
 
 Non Functional Logic

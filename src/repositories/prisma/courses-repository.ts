@@ -5,7 +5,7 @@ import { prisma } from '@/lib/prisma';
 export class PrismaCoursesRepository implements CoursesRepository {
 	async create(data: Prisma.CourseUncheckedCreateInput) {
 		const course = await prisma.course.create({
-			data: data
+			data: data,
 		});
 
 		return course;
@@ -14,6 +14,9 @@ export class PrismaCoursesRepository implements CoursesRepository {
 	async findById(courseId: string) {
 		const course = await prisma.course.findUnique({
 			where: { id: courseId },
+			include: {
+				ModulesOnCourses: true,
+			},
 		});
 
 		return course;
@@ -22,10 +25,9 @@ export class PrismaCoursesRepository implements CoursesRepository {
 	async update(courseId: string, data: Prisma.CourseUpdateWithoutUserInput) {
 		const updatedCourse = await prisma.course.update({
 			where: { id: courseId },
-			data: data
+			data: data,
 		});
 
 		return updatedCourse;
 	}
-
 }
