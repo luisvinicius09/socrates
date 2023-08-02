@@ -14,7 +14,7 @@ Functional Logic
 Business Logic
 - [x] A user can't register with an email that is already in use
 - [ ] The user will can only create 10 courses
-- [ ] Each course will be able to have multiple lesson
+- [x] Each course will be able to have multiple lesson
 - [ ] A lesson consists of text, video and/or files
 - [x] A module is able to group multiple lessons together
 - [x] A course is able to have multiple modules

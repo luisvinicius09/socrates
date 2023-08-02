@@ -16,9 +16,11 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
-  Course    Course[]
-  Lesson    Lesson[]
-  Module    Module[]
+
+  Course            Course[]
+  Lesson            Lesson[]
+  Module            Module[]
+  UsersOwnedCourses UsersOwnedCourses[]
 
   @@map("users")
 }
@@ -29,9 +31,11 @@ model Course {
   description String
   createdAt   DateTime @default(now())
 
-  userId           String
-  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
-  ModulesOnCourses ModulesOnCourses[]
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  ModulesOnCourses  ModulesOnCourses[]
+  UsersOwnedCourses UsersOwnedCourses[]
 
   @@map("courses")
 }
@@ -72,4 +76,16 @@ model Lesson {
   user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("lessons")
+}
+
+model UsersOwnedCourses {
+  createdAt DateTime @default(now())
+
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  @@id([userId, courseId])
+  @@map("users_owned_courses")
 }
