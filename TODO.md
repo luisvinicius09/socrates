@@ -5,7 +5,7 @@ Functional Logic
 - [x] Should be to be able to authenticate
 - [x] Should be able to create a new course
 - [x] Should be able to edit the course
-- [ ] Should be able to acquire a new course
+- [x] Should be able to acquire a new course
 - [x] Should be able to create a lesson
 - [x] Should be able to edit a lesson
 - [x] Should be able to create a module
@@ -19,7 +19,7 @@ Business Logic
 - [x] A module is able to group multiple lessons together
 - [x] A course is able to have multiple modules
 - [x] A module can be shared by multiple courses
-- [ ] A user can not acquire a course in which he is the owner
+- [x] A user can not acquire a course in which he is the owner
 
 Non Functional Logic
 - [x] The user password should be encrypted
